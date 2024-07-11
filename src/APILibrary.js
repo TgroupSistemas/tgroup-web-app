@@ -6,7 +6,7 @@ import axios from 'axios';
 dotenv.config();
 
 
-const URL ="http://srv.tgroup.com.ar:3334/webapp";
+const URL ="https://webapp.tgroup.com.ar/webapp";
 const KEY="$2a$10$d9IbX8BaND9kDRoI9JKCZu"
 const AUTH = `Bearer Mg.og_Wy4tHM9unKseHLu4F0wz4dDcwMsrZc49XXSOFpFDSO-nu7vbB5tYEBA9o` 
 
