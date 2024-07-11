@@ -187,17 +187,20 @@ export async function LbGetClases(empresa) {
 }
 
 export async function LbRegistroClase(pagina, parametros, endpoint, empresa) {
-
     if (pagina) {
         try {
             const parametross = new URLSearchParams(parametros);
-			let sqlString = '';
-			for (let [key, value] of parametross) {
-                sqlString += `${key}='${value}' AND `;
+            let sqlString = '';
+            for (let [key, value] of parametross) {
+                // Include single quotes around the value and use % as wildcards
+                sqlString += `${key} LIKE '%${value}%' AND `;
             }
             sqlString = sqlString.slice(0, -5); // remove the last ' AND '
+            // URL encode the entire SQL filter string to ensure special characters are correctly interpreted
+            const encodedSqlString = encodeURIComponent(sqlString);
+            console.log( `${URL}${endpoint}?page=${pagina}&cliente=${empresa}&sqlFilter=${encodedSqlString}`)
             const resp = await axios.get(
-                `${URL}${endpoint}?page=${pagina}&cliente=${empresa}&sqlFilter=${sqlString}`,
+                `${URL}${endpoint}?page=${pagina}&cliente=${empresa}&sqlFilter=${encodedSqlString}`,
                 config
             );
             return ({ status: 200, datos: resp.data });
@@ -211,8 +214,8 @@ export async function LbRegistroClase(pagina, parametros, endpoint, empresa) {
         }
     } else {
         return ({
-            status: error.response ? error.response.status : 500,
-            message: error.response ? error.response.data : error.message
+            status: 500,
+            message: "Page parameter is missing."
         });
     }
 }

@@ -18,6 +18,7 @@ import {
 } from "../APILibrary";
 import bcrypt from "bcrypt-nodejs";
 import dotenv from "dotenv";
+import { data } from "autoprefixer";
 dotenv.config();
 
 const AppContext = createContext();
@@ -219,16 +220,32 @@ export const AppContextProvider = ({ children }) => {
     },
     []
   );
-
+  function generateSqlFilterParams(parametros, filtro) {
+    // Split the parametros string into an array of parameter names
+  
+    
+    // Map each parameter name to a SQL-like filter string
+    const filters = parametros.map(param => `${param} LIKE '%${filtro}%'`);
+    
+    // Join the filter strings with ' OR '
+    const sqlFilter = filters.join(' OR ');
+    
+    return sqlFilter;
+    }
+    function generateSqlParams(dataActual) {
+      // Extract values from the object and return as an array
+      return Object.keys(dataActual);
+    }
+    
   //tolis
   const getEndpoint = useCallback(
     async (endpoint, pagina, filtro = "", dataActual = "") => {
       const fl_erp_empresas = getCookie("fl_erp_empresas");
-
+      console.log(generateSqlParams(dataActual));
       try {
         const data = await traerEndpoint(
           filtro,
-          generateSqlFilterParams(dataActual),
+          generateSqlParams(dataActual),
           pagina,
           getCookie("fl_erp_empresas"),
           endpoint

@@ -9,8 +9,9 @@ const PopUpFiltroTable = ({ visibleLabels, campos, campos2, endpoint, endpointUR
     setPopUpFiltroActivo,
   } = useAppContext();
   const formRef = useRef();
+  let options = [];
   const [formData, setFormData] = useState({}); // Initialize formData with an empty object
-
+  //console.log(visibleLabels, campos, campos2, endpoint, endpointURL)
   useEffect(() => {
     // This function now lives inside useEffect to avoid the rules of hooks violation
     function generateInitialFormData() {
@@ -92,24 +93,53 @@ const PopUpFiltroTable = ({ visibleLabels, campos, campos2, endpoint, endpointUR
       case 'F':
         inputType = 'number';
         break;
+      case 'V':
+          inputType = 'select';
+          const optionsArray = item.EDITORPAR1.split('|');
+          options = [];
+            for (let i = 0; i < optionsArray.length; i += 2) {
+              options.push({
+                value: optionsArray[i],
+                displayName: optionsArray[i + 1],
+              });
+            }
+        break;
       default:
         inputType = 'text';
     }
+    console.log(item)
     return (
       <div className="md:flex justify-end p-7 pt-6 pb-2" key={item.ATTNAME}>
         <h4 className="text-md font-semibold  text-gray-200 pr-5 mt-1">
           {item.DISPLAYLABEL}
         </h4>
         
-        <input
-          type={inputType}
-          id={`table-search-${item.ATTNAME}`}
-          value={formData[item.ATTNAME] || ""}
-          onChange={(e) =>
-            setFormData({ ...formData, [item.ATTNAME]: e.target.value })
-          }
-          className="block p-1 pl-4 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-200 dark:border-gray-200 dark:placeholder-black  dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        />
+        {inputType === 'select' ? (
+          <select
+            id={`table-search-${item.ATTNAME}`}
+            value={formData[item.ATTNAME] || ""}
+            onChange={(e) =>
+              setFormData({ ...formData, [item.ATTNAME]: e.target.value })
+            }
+            className="block p-1 pl-4 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-200 dark:border-gray-200 dark:placeholder-black  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          >
+            {options.map((option) => (
+      <option key={option.value} value={option.value}>
+        {option.displayName}
+      </option>
+    ))}
+          </select>
+        ) : (
+          <input
+            type={inputType}
+            id={`table-search-${item.ATTNAME}`}
+            value={formData[item.ATTNAME] || ""}
+            onChange={(e) =>
+              setFormData({ ...formData, [item.ATTNAME]: e.target.value })
+            }
+            className="block p-1 pl-4 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-200 dark:border-gray-200 dark:placeholder-black  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          />
+        )}
       </div>
     );
   })}
