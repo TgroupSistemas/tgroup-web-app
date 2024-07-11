@@ -35,7 +35,7 @@ export async function logeo (credentials) {
             let sqlFilter = `USERNAME = '${username}' AND FK_WS_CLIENTES= '${empresa}'`;
 
             if (passwordIntocada == "") {
-                sqlFilter += ` AND PASSWORD = ''`;
+                sqlFilter += ` AND (PASSWORD = '' OR PASSWORD IS NULL)`;
             }
             else{
                 sqlFilter += ` AND PASSWORD = '${pass}'`;
@@ -51,8 +51,8 @@ export async function logeo (credentials) {
             }
             else{
                 respuestaAPI = 200;
-                if(datos[0].PASSWORD== '' && passwordIntocada == '')
-                {	  
+                if((datos[0].PASSWORD === '' || datos[0].PASSWORD === null) && passwordIntocada == '')
+                    {	  
                     // Redirect to home page
                 }
                 else{

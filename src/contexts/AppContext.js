@@ -55,13 +55,13 @@ export const AppContextProvider = ({ children }) => {
     try {
       const data = await logeo(credentials);
       if (data.status == 200) {
-        setHasPassw(data.datos.PASSWORD != "" ? true : false);
+        setHasPassw(data.datos.PASSWORD != "" && data.datos.PASSWORD != null ? true : false);
         setLoggedIn(true);
         setResponseLogin(data);
         document.cookie = "isloggedin=" + true + "; max-age=3600; path=/";
         document.cookie = `id=${data.datos.ID}; max-age=3600; path=/`;
         document.cookie = `hasPassword=${
-          data.datos.PASSWORD != "" ? true : false
+          data.datos.PASSWORD != "" && data.datos.PASSWORD != null? true : false
         }; max-age=3600; path=/`;
         document.cookie =
           "rs_elecom=" + data.datos.ELECOM_RS + "; max-age=3600; path=/";
