@@ -44,6 +44,8 @@ export const AppContextProvider = ({ children }) => {
   const [endpointFiltroActual, setEndpointFiltroActual] = useState("");
   const [endpointActualPopUp, setEndpointActualPopUp] = useState("");
   const [hasPassw, setHasPassw] = useState(false);
+  const [alerts, setAlerts] = useState([]);
+
   const [filtroEndpointActualFijoPopUp, setFiltroEndpointActualFijoPopUp] =
     useState("");
   const [errorAlert, setErrorAlert] = useState("");
@@ -167,6 +169,11 @@ export const AppContextProvider = ({ children }) => {
     }
   }
 
+  const removeAlert = (index) => {
+    const updatedAlerts = [...alerts];
+    updatedAlerts.splice(index, 1);
+    setAlerts(updatedAlerts);
+};
   const activarPopUpFiltro = useCallback(async () => {
 
     setPopUpFiltroActivo(!popUpFiltroActivo);
@@ -198,6 +205,10 @@ export const AppContextProvider = ({ children }) => {
       console.error(error);
     }
   }, []);
+  const addAlert = (message) => {
+    const newAlert = message;
+    setAlerts([...alerts, newAlert]);
+};
 
   const getRegistroClase = useCallback(async (pagina, parametros, endpoint) => {
       setTareasLoading(true);
@@ -407,6 +418,9 @@ export const AppContextProvider = ({ children }) => {
         siguientePaginaPopUp,
         anteriorPaginaPopUp,
         hasPassw,
+        addAlert,
+        alerts,
+        removeAlert,
       }}
     >
       {children}

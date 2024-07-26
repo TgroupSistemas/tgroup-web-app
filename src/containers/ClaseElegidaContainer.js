@@ -4,6 +4,7 @@ import TareasForm from "@/components/TareasForm";
 import TareasTable from '@/components/TareasTable';
 import ClaseForm from '@/components/ClaseForm';
 import ClaseTable from '@/components/ClaseTable';
+import Alerts from '@/components/Alerts';
 const ClaseElegidaContainer = memo(({clase, isTabla, page}) => {
 
   const [isChecked, setIsChecked] = useState(isTabla);
@@ -24,7 +25,9 @@ const ClaseElegidaContainer = memo(({clase, isTabla, page}) => {
 
   };
   return (
+    
     <section className="text-gray-600 bg-white body-font relative">
+      <Alerts></Alerts>
       <div className="container px-3 py-12 mx-auto">
         <div className="flex flex-col text-center w-full mb-3">
           <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">

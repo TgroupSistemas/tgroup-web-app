@@ -5,9 +5,12 @@ import { useAppContext } from '@/contexts/AppContext';
 import PopUpEndpointSelector from "./PopUpEndpointSelector";
 //campos={clase.clase.WS_ATRIBUTOS} endpoint={clase.clase.WS_ENDPOINT}
 function ClaseForm({campos, endpoint}) {
-  const {enviarFormularioClase} = useAppContext();
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const {enviarFormularioClase, addAlert} = useAppContext();
   const handleSubmit = (e) => {
     e.preventDefault();
+    addAlert("¡Tarea enviada exitosamente!");
     enviarFormularioClase(endpoint);
   }
 
@@ -26,6 +29,11 @@ function ClaseForm({campos, endpoint}) {
           Enviar
         </button>
       </div>
+      {isSubmitted && (
+        <div className="mt-4 p-4 border border-green-400 border-r-8 text-green-700 rounded">
+          ¡Tarea enviada exitosamente!
+        </div>
+      )}
       
     </form>
   </div>

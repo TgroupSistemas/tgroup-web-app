@@ -94,7 +94,7 @@ const PopUpFiltroTable = ({ visibleLabels, campos, campos2, endpoint, endpointUR
         inputType = 'number';
         break;
       case 'V':
-          inputType = 'select';
+          inputType = 'text';
           const optionsArray = item.EDITORPAR1.split('|');
           options = [];
             for (let i = 0; i < optionsArray.length; i += 2) {
@@ -114,7 +114,7 @@ const PopUpFiltroTable = ({ visibleLabels, campos, campos2, endpoint, endpointUR
           {item.DISPLAYLABEL}
         </h4>
         
-        {inputType === 'select' ? (
+        {item.EDITORPAR1!="" ? (
           <select
             id={`table-search-${item.ATTNAME}`}
             value={formData[item.ATTNAME] || ""}
@@ -123,6 +123,8 @@ const PopUpFiltroTable = ({ visibleLabels, campos, campos2, endpoint, endpointUR
             }
             className="block p-1 pl-4 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-200 dark:border-gray-200 dark:placeholder-black  dark:focus:ring-blue-500 dark:focus:border-blue-500"
           >
+                <option value=""></option>
+
             {options.map((option) => (
       <option key={option.value} value={option.value}>
         {option.displayName}
