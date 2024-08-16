@@ -95,13 +95,30 @@ const RegistroContainer = ({ clase, id }) => {
           const attribute = clasesHabilitadas[position].WS_ATRIBUTOS.find(
             (attr) => attr.ATTNAME === key
           );
-          if(attribute.WS_ES_ID_CLASE == true)
+          let displayLabel = "";
+
+          if(!attribute)
           {
-            console.log(attribute)
+            let displayLabel = key + "A";
+            console.log(key, attribute)
+            console.log
           }
-          if(attribute.WS_VISIBLE_AL_VISUALIZAR == true)
-          {
-            const displayLabel = attribute ? attribute.DISPLAYLABEL : key;
+          else{
+            if(attribute.WS_ES_ID_CLASE == true)
+              {
+                console.log( Object.entries(registroActual)
+                .sort(
+                  ([keyA, valueA], [keyB, valueB]) =>
+                    String(valueB).length - String(valueA).length
+                ))
+                console.log( clasesHabilitadas[position].WS_ATRIBUTOS)
+              }
+              if(attribute.WS_VISIBLE_AL_VISUALIZAR == true)
+              {
+                displayLabel = attribute ? attribute.DISPLAYLABEL : key;
+              }
+          }
+         
 
             if (String(formattedValue).length <= 100) {
               return (
@@ -122,7 +139,7 @@ const RegistroContainer = ({ clase, id }) => {
             }
           }
           
-        })}
+        )}
   </>
 )}
             </div>

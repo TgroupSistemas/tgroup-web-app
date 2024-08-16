@@ -6,13 +6,21 @@ import { useAppContext } from "@/contexts/AppContext";
 function InputInt({ datos}) {
   const { activarPopUp, datosFormularioActual, setDatosFormularioActual, getCookie } =
     useAppContext();
-
+console.log(datos)
   useEffect(() => {
-    if (datos && datos.ATTNAME) {
+    if (datos && datos.ATTNAME == "FK_ERP_CONTACTOS") {
       setDatosFormularioActual((prevState) => ({
         ...prevState,
         [datos.ATTNAME]: datos.ATTNAME == "FK_ERP_CONTACTOS" ? Number(getCookie('fk_erp_contactos')) : "",
+        
       }));
+    }
+      if (datos && datos.ATTNAME == "FK_ERP_CONTACTOS_ALTA") {
+        setDatosFormularioActual((prevState) => ({
+          ...prevState,
+          [datos.ATTNAME]: datos.ATTNAME == "FK_ERP_CONTACTOS_ALTA"? Number(getCookie('fk_erp_contactos')) : "",
+          
+        }));
     }
   }, []);
 
