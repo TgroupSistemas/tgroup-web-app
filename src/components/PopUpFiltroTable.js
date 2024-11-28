@@ -61,7 +61,7 @@ const PopUpFiltroTable = ({ visibleLabels, campos, campos2, endpoint, endpointUR
       >
         <div
           id="text"
-          className="absolute top-5 md:w-auto left-1/2 max-h-[90vh] overflow-auto rounded-xl  text-white transform bg-gray-400 cursor-auto -translate-x-1/2 "
+          className="absolute top-5 md:w-auto left-1/2 max-h-[90vh] overflow-auto rounded-xl   text-white transform bg-gray-400 cursor-auto -translate-x-1/2 "
           onClick={(event) => {
             event.stopPropagation();
           }}
@@ -121,7 +121,7 @@ const PopUpFiltroTable = ({ visibleLabels, campos, campos2, endpoint, endpointUR
             onChange={(e) =>
               setFormData({ ...formData, [item.ATTNAME]: e.target.value })
             }
-            className="block p-1 pl-4 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-200 dark:border-gray-200 dark:placeholder-black  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="block p-1 pl-4 text-sm text-gray-900 border border-gray-300 rounded-lg  w-60 md:w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-200 dark:border-gray-200 dark:placeholder-black  dark:focus:ring-blue-500 dark:focus:border-blue-500"
           >
                 <option value=""></option>
 
@@ -139,7 +139,7 @@ const PopUpFiltroTable = ({ visibleLabels, campos, campos2, endpoint, endpointUR
             onChange={(e) =>
               setFormData({ ...formData, [item.ATTNAME]: e.target.value })
             }
-            className="block p-1 pl-4 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-200 dark:border-gray-200 dark:placeholder-black  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="block p-1 pl-4 text-sm text-gray-900 border border-gray-300 rounded-lg w-60 md:w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-200 dark:border-gray-200 dark:placeholder-black  dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
         )}
       </div>
